@@ -34,7 +34,7 @@ export interface StudentRecord {
 
 export const MARKS: Record<Mark, { symbol: string; label: string }> = {
   check: { symbol: "✓", label: "对勾" },
-  half: { symbol: "✓̸", label: "半对" },
+  half: { symbol: "半✓", label: "半对" },
   cross: { symbol: "✗", label: "叉" },
 };
 

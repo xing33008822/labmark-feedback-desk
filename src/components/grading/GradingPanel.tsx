@@ -12,6 +12,7 @@ import {
   type StudentRecord,
 } from "@/lib/grading";
 import { SectionTitle } from "./AnswerPanel";
+import { MarkIcon } from "./MarkIcon";
 
 interface Props {
   student: StudentRecord;
@@ -104,11 +105,11 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
                       title={MARKS[m].label}
                       onClick={() => updateItem(item.id, { mark: m })}
                       className={cn(
-                        "flex h-9 w-10 items-center justify-center rounded-md border font-serif text-lg font-bold transition",
+                        "flex h-9 w-10 items-center justify-center rounded-md border transition",
                         on ? markStyle[m].on : cn("bg-background text-muted-foreground", markStyle[m].off),
                       )}
                     >
-                      {MARKS[m].symbol}
+                      <MarkIcon mark={m} />
                     </button>
                   );
                 })}
@@ -117,7 +118,7 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
           ))}
         </ul>
         <p className="mt-2 text-xs text-muted-foreground">
-          输入分数后会自动推荐：满分 ✓、零分 ✗、其余半对 ✓̸，可手动改。
+          输入分数后会自动推荐：满分打勾、零分打叉、其余半对（勾上加一撇），可手动改。
         </p>
       </div>
 
@@ -127,7 +128,7 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
           value={student.comment}
           onChange={(e) => onChange({ ...student, written: false, comment: e.target.value })}
           rows={5}
-          className="ruled mt-4 resize-none border-dashed bg-background py-0 text-[15px] text-pen"
+          className="ruled mt-4 resize-none border-dashed bg-background py-0 text-[15px] leading-8 text-pen md:text-[15px]"
           aria-label="评语"
         />
         <div className="mt-3 flex flex-wrap gap-2">
