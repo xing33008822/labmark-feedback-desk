@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight, CheckCircle2, Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { StudentRecord } from "@/lib/grading";
+import { experimentLabel, type StudentRecord } from "@/lib/grading";
 
 interface Props {
   student: StudentRecord;
@@ -19,9 +19,17 @@ export function StudentHeader({ student, index, total, onPrev, onNext }: Props) 
         <div className="flex items-baseline gap-3">
           <span className="text-xs tracking-widest opacity-60">实验</span>
           <span className="font-serif text-2xl font-bold">
-            第<span className="mx-1 text-pen-soft">{student.experimentNo}</span>次实验
+            {student.experimentNo !== null ? (
+              <>
+                第<span className="mx-1 text-pen-soft">{student.experimentNo}</span>次实验
+              </>
+            ) : (
+              experimentLabel(student)
+            )}
           </span>
-          <span className="hidden text-sm opacity-70 md:inline">· {student.experimentTitle}</span>
+          {student.experimentName && student.experimentNo !== null && (
+            <span className="hidden text-sm opacity-70 md:inline">· {student.experimentName}</span>
+          )}
         </div>
 
         <div className="ml-auto flex items-center gap-3">
@@ -31,7 +39,7 @@ export function StudentHeader({ student, index, total, onPrev, onNext }: Props) 
             ) : (
               <Circle className="size-4" />
             )}
-            {student.written ? "已写入 Word" : "未写入"}
+            {student.written ? "批改稿已写出" : "待复核"}
           </span>
           <div className="flex items-center gap-1 rounded-md border border-ink-foreground/20 p-0.5">
             <Button
