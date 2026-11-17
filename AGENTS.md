@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Grading rules (score clamping, mark suggestion, totals, Excel rows) live in `src/lib/grading.ts` with tests; Word/Excel generation is browser-side in `src/lib/exporters.ts`, loaded via dynamic import so SSR never evaluates `docx`/`xlsx`.
