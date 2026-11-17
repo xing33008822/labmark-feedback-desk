@@ -25,7 +25,7 @@ function GradingDesk() {
   const [students, setStudents] = useState<StudentRecord[]>(STUDENTS);
   const [index, setIndex] = useState(0);
   const [busy, setBusy] = useState<"word" | "excel" | null>(null);
-  const student = students[index];
+  const student = students[index] ?? students[0]!;
 
   const update = (next: StudentRecord) =>
     setStudents((list) => list.map((s) => (s.id === next.id ? next : s)));
