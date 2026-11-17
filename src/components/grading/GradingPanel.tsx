@@ -78,7 +78,12 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
         <ul className="divide-y">
           {student.items.map((item) => (
             <li key={item.id} className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 py-3">
-              <span className="text-sm font-medium">{item.label}</span>
+              <span className="min-w-0">
+                <span className="block text-sm font-medium">{item.label}</span>
+                <span className={cn("block truncate text-xs", item.anchor ? "text-muted-foreground" : "text-half")}>
+                  {item.anchor ? `盖在「${item.anchor}」` : "报告里没找到作答区"}
+                </span>
+              </span>
               <label className="flex w-24 items-center gap-1 rounded-md border bg-background px-2 focus-within:ring-2 focus-within:ring-ring">
                 <input
                   type="number"
@@ -123,7 +128,7 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
       </div>
 
       <div className="paper-sheet p-6">
-        <SectionTitle title="评语" note="已写好的评语，可直接修改" />
+        <SectionTitle title="评语" note="写入 Word「评语」下面的单元格" />
         <Textarea
           value={student.comment}
           onChange={(e) => onChange({ ...student, written: false, comment: e.target.value })}
@@ -148,13 +153,17 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
       <div className="grid grid-cols-2 gap-3">
         <Button variant="pen" size="xl" onClick={onWriteWord} disabled={busy !== null}>
           {busy === "word" ? <Loader2 className="animate-spin" /> : <FileText />}
-          确认写入 Word
+          确认，写出批改稿
         </Button>
         <Button variant="outline" size="xl" onClick={onExportExcel} disabled={busy !== null}>
           {busy === "excel" ? <Loader2 className="animate-spin" /> : <FileSpreadsheet />}
           导出 Excel
         </Button>
       </div>
+      <p className="-mt-3 text-xs leading-relaxed text-muted-foreground">
+        批改稿是这位学生那份 Word 的副本：勾叉盖在各作答区上方，评语写进「评语」格，总分用数字图放进封面「成绩」格，原件不改动。Excel
+        另外导出全班成绩，每个实验一张表，外加汇总表。
+      </p>
     </aside>
   );
 }
