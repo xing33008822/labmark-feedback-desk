@@ -69,7 +69,7 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
           </div>
         </div>
 
-        <div className="mt-2 grid grid-cols-[1fr_auto_auto] items-center gap-x-4 text-xs text-muted-foreground">
+        <div className="mt-2 grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-4 text-xs text-muted-foreground">
           <span className="py-2">项目</span>
           <span className="w-24 text-center">分数</span>
           <span className="w-[132px] text-center">勾叉</span>
@@ -77,7 +77,7 @@ export function GradingPanel({ student, phrases, onChange, onWriteWord, onExport
 
         <ul className="divide-y">
           {student.items.map((item) => (
-            <li key={item.id} className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 py-3">
+            <li key={item.id} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-4 py-3">
               <span className="min-w-0">
                 <span className="block text-sm font-medium">{item.label}</span>
                 <span className={cn("block truncate text-xs", item.anchor ? "text-muted-foreground" : "text-half")}>
