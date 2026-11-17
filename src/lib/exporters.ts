@@ -39,7 +39,7 @@ export async function writeWord(student: StudentRecord) {
       children: [
         new Paragraph({
           alignment: AlignmentType.CENTER,
-          children: [new TextRun({ text, bold: opts.bold, color: opts.color, size: 22 })],
+          children: [new TextRun({ text, size: 22, ...(opts.bold ? { bold: true } : {}), ...(opts.color ? { color: opts.color } : {}) })],
         }),
       ],
     });
