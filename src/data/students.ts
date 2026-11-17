@@ -11,7 +11,7 @@ const items = (scores: [number, number, number, number]): GradeItem[] => {
     { id: "summary", label: "实验总结", max: 20 },
   ];
   return base.map((b, i) => {
-    const score = scores[i];
+    const score = scores[i] ?? 0;
     return {
       ...b,
       score,
@@ -85,7 +85,7 @@ export const STUDENTS: StudentRecord[] = [
     experimentNo: 3,
     experimentTitle: "单链表的基本操作",
     excerpts,
-    screenshots: [screenshots[1], screenshots[0]],
+    screenshots: [...screenshots.slice(0, 2)].reverse(),
     items: items([6, 28, 30, 0]),
     comment: "实验目的表述不完整；删除操作未释放内存。未提交实验总结。",
     written: false,
